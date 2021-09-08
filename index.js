@@ -14,9 +14,21 @@ export default () => {
 
   // console.log('got bounding box', boundingBox);
 
-	const u = `./_Down Tap Note 16x16.png`;
-  const img = await _loadImage(u);
-	const tex = new THREE.Texture(img);
+	const u = `${import.meta.url.replace(/(\/)[^\/]*$/, '$1')}_Down Tap Note 16x16.png`;
+  (async () => {
+    const img = await new Promise((accept, reject) => {
+      const img = new Image();
+      img.onload = () => {
+        accept(img);
+      };
+      img.onerror = reject;
+      img.crossOrigin = 'Anonymous';
+      img.src = u;
+    });
+    tex.image = img;
+    tex.needsUpdate = true;
+  })();
+	const tex = new THREE.Texture();
 	// tex.minFilter = THREE.NearestFilter;
 	tex.magFilter = THREE.NearestFilter;
 	tex.needsUpdate = true;
