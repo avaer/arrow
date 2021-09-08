@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import metaversefile from 'metaversefile';
+const {useFrame} = metaversefile;
 
 export default () => {
   const geometry = new THREE.PlaneBufferGeometry(0.5, 0.5)
@@ -68,8 +70,8 @@ export default () => {
     // polygonOffsetUnits: 1,
   });
   const mesh = new THREE.Mesh(geometry, material);
-  mesh.update = () => {
+  useFrame(() => {
 	  material.uniforms.uTime.value = (Date.now() % 30000) / 30000;
-	};
+	});
   return mesh;
 };
