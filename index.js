@@ -31,7 +31,6 @@ export default () => {
 	const tex = new THREE.Texture();
 	// tex.minFilter = THREE.NearestFilter;
 	tex.magFilter = THREE.NearestFilter;
-	tex.needsUpdate = true;
 
 	const material = new THREE.ShaderMaterial({
     uniforms: {
